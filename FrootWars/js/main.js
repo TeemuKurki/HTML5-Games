@@ -67,6 +67,7 @@ var game = {
         //Get handler for game canvas and context
         game.canvas = document.getElementById('gamecanvas');
         game.context = game.canvas.getContext('2d');
+
     },
 
     showLevelScreen: function() {
@@ -87,7 +88,9 @@ var game = {
         $("#gamecanvas").show();
         $("#scorescreen").show();
 
-        game.startBackgroundMusic();
+        //Currently music is stopped when game launches because it gets annoying :D 
+        //game.stopBackgroundMusic();
+        game.stopBackgroundMusic();
 
         game.mode = "intro";
         game.offsetLeft = 0;
@@ -96,7 +99,7 @@ var game = {
     },
 
     //Max panning speed per frame in pixels
-    maxSpeed: 3,
+    maxSpeed: 3.5,
     //Min and Max panning offset
     minOffset: 0,
     maxOffset: 300,
@@ -126,15 +129,11 @@ var game = {
 
     countHeroesAndVillains:function(){
         game.heroes = [];
-        game.villains = [];
         for(var body = box2d.world.GetBodyList(); body; body = body.GetNext()){
             var entity = body.GetUserData();
             if(entity){
                 if(entity.type == "hero"){
                     game.heroes.push(body);
-                }
-                else if(entity.type == "villain"){
-                    game.villains.push(body);
                 }
             }
         }
@@ -194,8 +193,12 @@ var game = {
         levels.load(game.currentLevel.number + 1);
     },
 
+    strokeCounter: 0,
+
     handlePanning: function() {
         if (game.mode == "intro") {
+            game.strokeCounter = 0;
+            $("#scorescreen  #Stroke").html("Stroke: "+game.strokeCounter);
             if (game.panTo(700)) {
                 game.mode = "load-next-hero";
             }
@@ -215,11 +218,6 @@ var game = {
         if (game.mode == "load-next-hero") {
             game.countHeroesAndVillains();
 
-            //Chech if any villains are still alive, if not, end the level.(Success)
-            if(game.villains.length == 0){
-                game.mode = "level-success";
-                return;
-            }
             //Check if there are any more heroes left to load, if not, end the level (Failure)
             if(game.heroes.length == 0){
                 game.mode = "level-failure";
@@ -250,6 +248,8 @@ var game = {
             else{
                 game.mode = "fired";
                 game.slingshotReleasedSound.play();
+                game.strokeCounter++;
+                $("#scorescreen  #Stroke").html("Stroke: "+game.strokeCounter);
                 var impulseScaleFactor = 0.75;
                 var impulse = new b2Vec2((game.slingshotX + 35 - mouse.x - game.offsetLeft)*impulseScaleFactor, (game.slingshotY + 25 - mouse.y)*impulseScaleFactor);
                 game.currentHero.ApplyImpulse(impulse, game.currentHero.GetWorldCenter());
@@ -327,10 +327,6 @@ var game = {
                 var entityX = body.GetPosition().x * box2d.scale;
                 if(entityX < 0 || entityX > game.currentLevel.foregroundImage.width || (entity.health && entity.health < 0)){
                     box2d.world.DestroyBody(body);
-                    if(entity.type=="villain"){
-                        game.score += entity.calories;
-                        $("#score").html("Score: " + game.score);
-                    }
                     if(entity.breakSound){
                         entity.breakSound.play();
                     }

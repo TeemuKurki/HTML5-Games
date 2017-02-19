@@ -7,9 +7,10 @@ var entities = {
         "burger":{shape:"circle", fullHealth:40, radius:25, density:1, friction:0.5, restitution:0.4, angularDamping:0.5},
         "sodacan":{shape:"rectangle", fullHealth:80, width:40, height:60, density:1, friction:0.5, restitution:0.7},
         "fries":{shape:"rectangle", fullHealth:50, width:40, height:50, density:1, friction:0.5, restitution:0.6},
-        "apple":{shape:"circle", radius:25, density:1.5, friction:0.5, restitution:0.4, angularDamping:0.5},
-        "orange":{shape:"circle", radius:25, density:1.5, friction:0.5, restitution:0.4, angularDamping:0.5},
-        "strawberry":{shape:"circle", radius:15, density:2.0, friction:0.5, restitution:0.4, angularDamping:0.5}
+        "apple":{shape:"circle", radius:25, density:1.5, friction:0.5, restitution:0.4, angularDamping:0.6},
+        "orange":{shape:"circle", radius:25, density:1.5, friction:0.5, restitution:0.4, angularDamping:0.6},
+        "strawberry":{shape:"circle", radius:15, density:2.0, friction:0.5, restitution:0.4, angularDamping:0.6},
+        "target":{shape:"circle", radius:25, density:3.0, friction:2.0, restitution: 0.4}
     },
     //Take entity and create a Box2D body and add it to the world
     create:function(entity){
@@ -33,6 +34,7 @@ var entities = {
                 // No need for sprites. These won't be drawn at all
                 box2d.createRectangle(entity,definition);
                 break;
+            case "goal":
             case "hero": // simple circles
             case "villain": // can be circles or rectangles
                 entity.health = definition.fullHealth;
@@ -63,6 +65,7 @@ var entities = {
             case "block":
                 game.context.drawImage(entity.sprite, 0 ,0, entity.sprite.width, entity.sprite.height, -entity.width/2-1, -entity.height/2-1, entity.width+2, entity.height+2);
                 break;
+            case "goal":
             case "villain":
             case "hero":
                 if(entity.shape == "circle"){

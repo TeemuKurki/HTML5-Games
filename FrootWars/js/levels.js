@@ -9,18 +9,25 @@ var levels = {
 		entities:[
             //Ground and slingshot
 			{type:"ground", name:"dirt", x:500,y:440,width:1000,height:20,isStatic:true},
-			{type:"ground", name:"wood", x:185,y:390,width:30,height:80,isStatic:true},
+			{type:"ground", name:"wood", x:185,y:390,width:10,height:80,isStatic:true},	
 
-			{type:"block", name:"wood", x:520,y:380,angle:90,width:100,height:25},
-			{type:"block", name:"glass", x:520,y:280,angle:90,width:100,height:25},								
-			{type:"villain", name:"burger",x:520,y:205,calories:790},
+            {type:"block", name:"wood", x:500,y:370,width:30,height:120, isStatic:true},
+            {type:"block", name:"wood", x:535,y:295,width:100,height:30, isStatic:true},
 
-			{type:"block", name:"wood", x:620,y:380,angle:90,width:100,height:25},
-			{type:"block", name:"glass", x:620,y:280,angle:90,width:100,height:25},								
-			{type:"villain", name:"fries", x:620,y:205,calories:520},				
+            {type:"block", name:"wood", x:750,y:360,width:30,height:140, isStatic:true},
+            {type:"block", name:"wood", x:750,y:240,width:30,height:100, isStatic:true},
 
-			{type:"hero", name:"orange",x:80,y:405},
+            {type:"block", name:"wood", x:655,y:205,width:160,height:30, isStatic:true},
+            {type:"block", name:"wood", x:535,y:205,width:80,height:30, isStatic:true},
+            
+            {type:"block", name:"glass", x:620,y:360,width:30,height:140, isStatic:true, angle:-35},
+
+			{type:"hero", name:"orange",x:495,y:250},
+
+            {type:"hero", name:"orange",x:80,y:405},
 			{type:"hero", name:"apple",x:140,y:405},
+
+            {type:"goal", name:"target", x:700, y:400, isStatic:true},
 		]
 	 },
 		{   // Second level 
@@ -30,25 +37,29 @@ var levels = {
 				{type:"ground", name:"dirt", x:500,y:440,width:1000,height:20,isStatic:true},
 				{type:"ground", name:"wood", x:185,y:390,width:30,height:80,isStatic:true},
 
-				{type:"block", name:"wood", x:820,y:380,angle:90,width:100,height:25},
-				{type:"block", name:"wood", x:720,y:380,angle:90,width:100,height:25},
-				{type:"block", name:"wood", x:620,y:380,angle:90,width:100,height:25},
-				{type:"block", name:"glass", x:670,y:317.5,width:100,height:25},
-				{type:"block", name:"glass", x:770,y:317.5,width:100,height:25},				
-
-				{type:"block", name:"glass", x:670,y:255,angle:90,width:100,height:25},
-				{type:"block", name:"glass", x:770,y:255,angle:90,width:100,height:25},
-				{type:"block", name:"wood", x:720,y:192.5,width:100,height:25},	
-
-				{type:"villain", name:"burger",x:715,y:155,calories:590},
-				{type:"villain", name:"fries",x:670,y:405,calories:420},
-				{type:"villain", name:"sodacan",x:765,y:400,calories:150},
-
 				{type:"hero", name:"strawberry",x:30,y:415},
 				{type:"hero", name:"orange",x:80,y:405},
 				{type:"hero", name:"apple",x:140,y:405},
+
+                {type:"goal", name:"target",x:900,y:400, isStatic:true},
 			]
 		},
+        {   //Third level.. Test level
+            foreground:'desert-foreground',
+            background:'clouds-background',
+            entities:[
+                //Ground and slingshot
+                {type:"ground", name:"dirt", x:500,y:440,width:1000,height:20,isStatic:true},
+                {type:"ground", name:"wood", x:185,y:390,width:30,height:80,isStatic:true},
+						
+                {type:"villain", name:"fries", x:400,y:300,calories:520},				
+
+                {type:"hero", name:"orange",x:80,y:405},
+                {type:"hero", name:"apple",x:140,y:405},
+
+                {type:"goal", name:"target", x:400, y:400, isStatic:true},
+            ]
+        }
         
 	],
 

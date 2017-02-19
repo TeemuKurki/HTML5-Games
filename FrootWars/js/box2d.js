@@ -25,8 +25,12 @@ var box2d = {
 
             var impulseAlongNormal = Math.abs(impulse.normalImpulses[0]);
                 //Listener is called a little too often. Filter out very small impulseScaleFactor
-                //After trying different values, 5 seems to work Well
-                if(impulseAlongNormal > 5){
+                //After trying different values, 2 seems to work Well
+                if(impulseAlongNormal > 1.5){
+                    if((entity1.type == "hero" && entity2.type == "goal") || (entity2.type == "hero" && entity1.type == "goal")){
+                        game.mode = "level-success";
+                        game.showEndingScreen();
+                    }
                     //if objects have a health, reduce health by the impulse value
                     if(entity1.health){
                         entity1.health -= impulseAlongNormal;
